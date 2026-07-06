@@ -1,0 +1,33 @@
+:root {
+  --cream: #F7F5F0;
+  --ivory: #EDEAE3;
+  --warm-gray: #9A9389;
+  --text: #222018;
+  --text-soft: #5A5650;
+  --sage: #7E9A7E;
+  --dusty-blue: #7A8FA6;
+  --border: #D8D4CC;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Inter', sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--cream); color: var(--text); font-family: var(--font-body); font-size: 15px; line-height: 1.75; }
+a { color: inherit; text-decoration: none; }
+header { border-bottom: 1px solid var(--border); padding: 1.1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+.site-title { font-family: var(--font-display); font-size: 1.25rem; }
+.site-title em { color: var(--sage); font-style: italic; }
+.wrap { max-width: 720px; margin: 0 auto; padding: 3rem 2rem; }
+.post-card { padding-bottom: 2.2rem; margin-bottom: 2.2rem; border-bottom: 1px solid var(--border); }
+.post-meta { font-size: .7rem; letter-spacing: .06em; color: var(--warm-gray); margin-bottom: .4rem; display: flex; gap: .8rem; text-transform: uppercase; }
+.post-category { background: var(--ivory); padding: .1rem .5rem; border-radius: 2px; }
+.post-title { font-family: var(--font-display); font-size: 1.6rem; margin-bottom: .5rem; }
+.post-title a:hover { color: var(--sage); }
+.post-excerpt { font-size: .9rem; color: var(--text-soft); margin-bottom: .6rem; }
+.post-location { font-size: .78rem; color: var(--dusty-blue); margin-bottom: .4rem; }
+.read-more { font-size: .78rem; color: var(--sage); }
+.post-image { width: 100%; border-radius: 2px; margin: 1rem 0; }
+.post-body { font-size: .95rem; line-height: 1.8; margin-top: 1rem; }
+.post-body p { margin-bottom: 1rem; }
+.back-link { display: inline-block; margin-top: 2rem; font-size: .8rem; color: var(--sage); }
+footer { text-align: center; padding: 2rem; border-top: 1px solid var(--border); font-size: .75rem; color: var(--warm-gray); }
+.footer-tagline { font-family: var(--font-display); font-style: italic; color: var(--text-soft); margin-bottom: .3rem; }

@@ -1,0 +1,21 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  - name: "posts"
+    label: "Tulisan"
+    folder: "posts"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Layout", name: "layout", widget: "hidden", default: "post.njk" }
+      - { label: "Judul", name: "title", widget: "string" }
+      - { label: "Tanggal", name: "date", widget: "datetime" }
+      - { label: "Kategori", name: "category", widget: "string", required: false }
+      - { label: "Lokasi", name: "location", widget: "string", required: false }
+      - { label: "Ringkasan", name: "excerpt", widget: "text" }
+      - { label: "Isi Tulisan", name: "body", widget: "markdown" }

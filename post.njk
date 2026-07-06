@@ -1,0 +1,16 @@
+---
+layout: base.njk
+---
+<article class="post">
+  <div class="post-meta">
+    <span class="post-category">{{ category }}</span>
+    <span>{{ date | date("MMMM yyyy") }}</span>
+  </div>
+  <h1 class="post-title">{{ title }}</h1>
+  {% if location %}<div class="post-location">📍 {{ location }}</div>{% endif %}
+  {% if image %}<img class="post-image" src="{{ image }}" alt="{{ title }}">{% endif %}
+  <div class="post-body">
+    {{ content | safe }}
+  </div>
+  <a href="/" class="back-link">← Kembali</a>
+</article>
