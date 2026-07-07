@@ -2,19 +2,150 @@
 layout: base.njk
 title: along with me
 ---
-<div class="feed">
-  {% for post in collections.posts | reverse %}
-  <article class="post-card">
-    <div>
-      <div class="post-meta">
-        <span class="post-category">{{ post.data.category }}</span>
-        <span>{{ post.data.date | date("MMMM yyyy") }}</span>
-      </div>
-      <h2 class="post-title"><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
-      <p class="post-excerpt">{{ post.data.excerpt }}</p>
-      {% if post.data.location %}<div class="post-location">📍 {{ post.data.location }}</div>{% endif %}
-      <a href="{{ post.url }}" class="read-more">Baca selengkapnya →</a>
+{% set latest = collections.posts[0] %}
+
+{% if latest %}
+<section class="hero">
+  <div class="hero-text">
+    <p class="hero-eyebrow">Latest Entry</p>
+    <h1 class="hero-title">{{ latest.data.title }}</h1>
+    <p class="hero-tagline">"{{ latest.data.excerpt }}"</p>
+    <div class="hero-meta">
+      {% if latest.data.location %}<span>📍 {{ latest.data.location }}</span>{% endif %}
+      <span>🗓 {{ latest.data.date | date("MMMM yyyy") }}</span>
+      {% if latest.data.category %}<span>🏷 {{ latest.data.category }}</span>{% endif %}
     </div>
-  </article>
-  {% endfor %}
+  </div>
+  <div class="hero-image-wrap">
+    {% if latest.data.image %}
+      <img src="{{ latest.data.image }}" alt="{{ latest.data.title }}">
+    {% else %}
+      <div class="img-placeholder" style="height:340px;">
+        <span class="icon">🐦</span>
+        <span>Your photo here</span>
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% endif %}
+
+<div id="birdlog" class="section-divider"><span class="section-label">Recent Sightings</span></div>
+<div class="bird-strip">
+  <div class="bird-grid">
+    <div class="bird-card">
+      <div class="bird-card-img-placeholder img-placeholder" style="font-size:1.8rem;">🦆</div>
+      <div class="bird-card-info">
+        <div class="bird-name">Spot-billed Duck</div>
+        <div class="bird-place">📍 Ueno, Tokyo</div>
+      </div>
+    </div>
+    <div class="bird-card">
+      <div class="bird-card-img-placeholder img-placeholder" style="font-size:1.8rem;">🐦</div>
+      <div class="bird-card-info">
+        <div class="bird-name">Brown-eared Bulbul</div>
+        <div class="bird-place">📍 Nara</div>
+      </div>
+    </div>
+    <div class="bird-card">
+      <div class="bird-card-img-placeholder img-placeholder" style="font-size:1.8rem;">🦅</div>
+      <div class="bird-card-info">
+        <div class="bird-name">Black Kite</div>
+        <div class="bird-place">📍 Miyajima</div>
+      </div>
+    </div>
+    <div class="bird-card">
+      <div class="bird-card-img-placeholder img-placeholder" style="font-size:1.8rem;">🐧</div>
+      <div class="bird-card-info">
+        <div class="bird-name">Japanese Wagtail</div>
+        <div class="bird-place">📍 Kyoto</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="articles" class="section-divider"><span class="section-label">Field Notes</span></div>
+<div class="layout">
+
+  <main class="feed">
+    {% for post in collections.posts %}
+      {% if not loop.first %}
+      <article class="post-card">
+        <div>
+          <div class="post-meta">
+            <span class="post-category">{{ post.data.category }}</span>
+            <span>{{ post.data.date | date("MMMM yyyy") }}</span>
+          </div>
+          <h2 class="post-title"><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
+          <p class="post-excerpt">{{ post.data.excerpt }}</p>
+          {% if post.data.location %}<div class="post-location">📍 {{ post.data.location }}</div>{% endif %}
+          <a href="{{ post.url }}" class="read-more">Baca selengkapnya →</a>
+        </div>
+      </article>
+      {% endif %}
+    {% endfor %}
+  </main>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-block">
+      <p class="sidebar-heading">Random Memory</p>
+      <div class="random-memory">
+        <p class="memory-text" id="memoryText"></p>
+      </div>
+    </div>
+
+    <div id="about" class="sidebar-block">
+      <p class="sidebar-heading">About</p>
+      <p class="about-text">"I write about places I've been, things I've noticed, and thoughts I don't want to lose."</p>
+    </div>
+
+    <div class="sidebar-block">
+      <p class="sidebar-heading">Search</p>
+      <div class="search-wrap">
+        <input type="text" placeholder="Cari..." />
+        <button>🔍</button>
+      </div>
+    </div>
+
+    <div class="sidebar-block">
+      <p class="sidebar-heading">Categories</p>
+      <ul class="category-list">
+        {% for cat in collections.categories %}
+        <li><a href="#">{{ cat.name }} <span class="cat-count">{{ cat.count }}</span></a></li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="sidebar-block">
+      <p class="sidebar-heading">Recent Posts</p>
+      <ul class="recent-list">
+        {% for post in collections.posts %}
+        {% if loop.index0 < 3 %}
+        <li>
+          <a href="{{ post.url }}">{{ post.data.title }}</a>
+          <div class="recent-date">{{ post.data.date | date("MMMM yyyy") }}</div>
+        </li>
+        {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="sidebar-block">
+      <p class="sidebar-heading">Places Visited</p>
+      <div class="japan-map">
+        <div class="map-inner">🗾</div>
+        <div class="map-label">Tempat yang pernah aku datangi</div>
+        <div class="visited-tags">
+          <span class="visited-tag">Tokyo</span>
+          <span class="visited-tag">Kyoto</span>
+          <span class="visited-tag">Osaka</span>
+          <span class="visited-tag">Sapporo</span>
+          <span class="visited-tag">Nara</span>
+          <span class="visited-tag">Otaru</span>
+          <span class="visited-tag">Miyajima</span>
+        </div>
+      </div>
+    </div>
+
+  </aside>
 </div>
