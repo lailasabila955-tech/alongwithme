@@ -15,6 +15,16 @@ module.exports = function (eleventyConfig) {
     return collectionApi.getFilteredByGlob("posts/*.md").sort((a, b) => b.date - a.date);
   });
 
+  eleventyConfig.addCollection("categories", function (collectionApi) {
+    const posts = collectionApi.getFilteredByGlob("posts/*.md");
+    const counts = {};
+    posts.forEach((p) => {
+      const cat = p.data.category || "Uncategorized";
+      counts[cat] = (counts[cat] || 0) + 1;
+    });
+    return Object.entries(counts).map(([name, count]) => ({ name, count }));
+  });
+
   return {
     dir: {
       input: ".",
