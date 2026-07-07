@@ -4,25 +4,71 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{{ title or "along with me" }}</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+
   <link rel="stylesheet" href="/css/style.css" />
 </head>
+
 <body>
+
   <header>
-    <a href="/" class="site-title">along <em>with</em> me<span>.</span></a>
+    <a href="/" class="site-title">
+      along <em>with</em> me<span>.</span>
+    </a>
+
     <nav>
       <a href="/">Home</a>
+      <a href="/#articles">Articles</a>
+      <a href="/#birdlog">Bird Log</a>
+      <a href="/#about">About</a>
+      <button class="dark-toggle" id="toggle">🌙 Dark</button>
     </nav>
   </header>
 
-  <main class="wrap">
-    {{ content | safe }}
-  </main>
+  {{ content | safe }}
 
   <footer>
     <p class="footer-tagline">Thanks for reading.</p>
     <p class="footer-meta">alongwithme.com</p>
   </footer>
+
+  <script>
+    const memories = [
+      "burung ini membawaku kembali ke mukawa.",
+      "mulutku terbakar.",
+      "keretanya kosong, tapi rasanya seperti penuh.",
+      "langitnya terlalu biru untuk diabaikan.",
+      "aku lupa makan siang, tapi tidak lupa memotret.",
+      "salju pertama selalu terasa seperti rahasia.",
+      "ada sesuatu di aroma stasiun pagi hari.",
+      "aku berdiri di sana cukup lama sampai burung itu tidak takut lagi.",
+      "dinginnya pas. tidak berlebihan.",
+      "ramen itu terlalu panas, tapi aku tidak mau berhenti."
+    ];
+
+    const memoryEl = document.getElementById("memoryText");
+
+    if (memoryEl) {
+      memoryEl.textContent =
+        '"' + memories[Math.floor(Math.random() * memories.length)] + '"';
+    }
+
+    const toggle = document.getElementById("toggle");
+
+    if (toggle) {
+      const html = document.documentElement;
+      let dark = false;
+
+      toggle.addEventListener("click", () => {
+        dark = !dark;
+        html.setAttribute("data-theme", dark ? "dark" : "");
+        toggle.textContent = dark ? "☀️ Light" : "🌙 Dark";
+      });
+    }
+  </script>
+
 </body>
 </html>
